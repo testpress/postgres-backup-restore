@@ -16,7 +16,7 @@ This repository contains scripts to help you set up and manage PostgreSQL backup
 
 1. Clone this repository:
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:testpress/postgres-backup-restore.git
    cd postgres-backup-restore
    ```
 

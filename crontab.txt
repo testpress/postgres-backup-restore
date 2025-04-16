@@ -1,0 +1,10 @@
+# Crontab configuration for PostgreSQL backup with WAL-G
+# Run the backup script daily at 1:00 AM
+# The script will automatically determine if a full backup is needed (every 3 days)
+0 1 * * * /path/to/your/pg_backup.sh >> /var/log/pg_backups/cron.log 2>&1
+
+# Monitor WAL archiving status every hour
+0 * * * * source /path/to/your/wal-g_env.sh && psql -c "SELECT pg_switch_wal();" >> /var/log/pg_backups/wal_switch.log 2>&1
+
+# Check S3 storage usage weekly and send a report (Sunday at 5:00 AM)
+0 5 * * 0 source /path/to/your/wal-g_env.sh && aws s3 ls --summarize --human-readable --recursive "$WALG_S3_PREFIX" | mail -s "S3 Backup Storage Report" your-email@example.com 

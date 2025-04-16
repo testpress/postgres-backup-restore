@@ -22,7 +22,7 @@ This repository contains scripts to help you set up and manage PostgreSQL backup
 
 2. Make the scripts executable:
    ```bash
-   chmod +x install.sh restore.sh backup.sh
+   chmod +x install.sh restore.sh full_backup.sh incremental_backup.sh
    ```
 
 3. Run the installation script:
@@ -86,6 +86,8 @@ To set up automated backups, add the following to your crontab:
 # Run incremental backup every 2 hours
 0 */2 * * * /path/to/incremental_backup.sh
 
+# Archive WAL files every 5 minutes
+*/5 * * * * pgbackrest --stanza=pgdb archive-push
 ```
 
 The backup schedule works as follows:

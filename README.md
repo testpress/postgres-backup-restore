@@ -32,18 +32,20 @@ This repository contains scripts to help you set up and manage PostgreSQL backup
 
 4. Copy the sample configuration:
    ```bash
+   sudo mkdir -p /etc/pgbackrest
    sudo cp pgbackrest.conf /etc/pgbackrest/pgbackrest.conf
    sudo chmod 640 /etc/pgbackrest/pgbackrest.conf
+   sudo chown -R postgres:postgres /etc/pgbackrest/
    ```
 
 5. Set up environment variables for Wasabi credentials:
    ```bash
-   sudo tee /etc/profile.d/pgbackrest.sh << EOF
-   export WASABI_KEY="your-access-key"
-   export WASABI_SECRET="your-secret-key"
-   export WASABI_REGION="your-region"
-   export WASABI_BUCKET="your-bucket"
-   EOF
+        cat << 'EOF' >> ~/.bash_aliases
+        export WASABI_KEY="your-access-key"
+        export WASABI_SECRET="your-secret-key"
+        export WASABI_REGION="your-region"
+        export WASABI_BUCKET="your-bucket"
+        EOF
    ```
 
 ## Backup Configuration
